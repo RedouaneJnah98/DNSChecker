@@ -12,6 +12,11 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
+}
+else
+{
+    app.UseExceptionHandler("/error");
 }
 
 app.UseHttpsRedirection();
@@ -37,6 +42,8 @@ app.MapGet("/weatherforecast", () =>
     .WithOpenApi();
 
 app.Run();
+
+app.MapGet("/error", () => Results.Problem());
 
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {
