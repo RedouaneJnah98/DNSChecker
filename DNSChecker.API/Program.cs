@@ -19,6 +19,15 @@ else
     app.UseExceptionHandler("/error");
 }
 
+if (app.Configuration.GetValue<bool>("UseDeveloperExceptionPage"))
+{
+    app.UseDeveloperExceptionPage();
+}
+else
+{
+    app.UseExceptionHandler("/error");
+}
+
 app.UseHttpsRedirection();
 
 app.MapGet("/error", () => Results.Problem());
